@@ -1,0 +1,202 @@
+.section-header-menu {
+  width: 100%;
+  height: 81px;
+}
+.header-navbar {
+  z-index: 99999;
+  background: #fff;
+}
+
+.navbar {
+  flex-direction: row-reverse;
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+}
+.header-navbar .navbar-brand {
+  max-width: 170px !important;
+  max-height: 80px !important;
+}
+.amx-cp-btn {
+  color: #dc291e;
+  background-color: #fff;
+  line-height: 0.7;
+  padding: 0.7em 1em;
+  margin-bottom: 0;
+}
+.amx-cp-btn {
+  color: inherit;
+  text-decoration: inherit;
+  cursor: inherit;
+  color: #fff;
+  display: inline-block;
+  text-transform: none;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.2;
+  padding: 1em 1em;
+  margin-bottom: 10px;
+  border: 0 none;
+  cursor: pointer;
+  text-transform: capitalize;
+  text-align: center;
+  border-radius: 10px;
+  transition: all 0.2s linear;
+}
+.header-logo {
+  max-width: 170px !important;
+  max-height: 80px !important;
+  padding: 9px !important;
+}
+.header-logo {
+  max-width: 170px !important;
+  max-height: 80px !important;
+  padding: 9px !important;
+}
+.hamburger {
+  height: 60px;
+  font-size: 1em;
+  transition: 0.3s;
+  cursor: pointer;
+  border-radius: 1px;
+  border: none;
+  display: block;
+}
+
+.hamburger.xminus .lines {
+  transition: background 0.2s 0.3s ease;
+  -webkit-transition: background 0.2s 0.3s ease;
+}
+
+.hamburger.xminus .lines {
+  transition: background 0.2s 0.3s ease;
+  -webkit-transition: background 0.2s 0.3s ease;
+}
+.hamburger .lines,
+.hamburger .lines::after,
+.hamburger .lines::before {
+  background: #dc291e;
+  width: 25px;
+  height: 2px;
+}
+.hamburger .lines {
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  position: relative;
+}
+.hamburger {
+  height: 20px;
+  display: unset;
+}
+
+.collapse:not(.show) {
+  display: none;
+}
+.collapse {
+  display: none;
+}
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+nav.navbar.header-navbar .collapse.navbar-collapse ul:nth-child(1) {
+  margin-left: auto !important;
+  margin-right: 10px !important;
+  padding-right: 0 !important;
+}
+.collapse.navbar-collapse.dropdown-menu-web ul.navbar-nav li.nav-item {
+  height: 80px !important;
+  line-height: 60px !important;
+}
+.navbar .navbar-nav .nav-item a.nav-item-text {
+  color: #353535;
+  font-size: 16px;
+}
+nav.navbar.header-navbar .collapse.navbar-collapse ul:nth-child(2) {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+.navbar-nav {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+.navbar-collapse {
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -ms-flex-align: center;
+  align-items: center;
+}
+@media (min-width: 668px) {
+  .hamburger {
+    height: 75px;
+  }
+}
+@media (min-width: 1025px) {
+  .navbar-expand-lg .navbar-nav {
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+  .navbar-expand-lg .navbar-collapse {
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+  }
+
+  .amx-h-show-on-small.amx-h-hide-on-large {
+    display: none !important;
+  }
+}
+@media (max-width: 1024px) {
+  .section-header-menu {
+    width: 100%;
+    height: 70px;
+  }
+  .section-header-menu {
+    width: 100%;
+    height: 70px;
+  }
+  .header-logo {
+    max-width: 150px !important;
+    max-height: 90px !important;
+    padding: 9px 0 !important;
+  }
+  .header-logo {
+    max-width: 150px !important;
+    max-height: 90px !important;
+    padding: 9px 0 !important;
+  }
+}
+@media (max-width: 567px) {
+  .header-logo {
+    max-width: 100px !important;
+    max-height: 90px !important;
+    padding: 7px 0 !important;
+  }
+
+  .header-logo {
+    max-width: 100px !important;
+    max-height: 90px !important;
+    padding: 7px 0 !important;
+  }
+  .section-header-menu {
+    width: 100%;
+    height: 60px;
+  }
+
+  .section-header-menu {
+    width: 100%;
+    height: 60px;
+  }
+}

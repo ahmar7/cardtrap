@@ -104,6 +104,15 @@ img {
   margin-bottom: 0;
   font-weight: 600;
 }
+.header-abs {
+  position: fixed;
+  top: 0;
+  background-color: white;
+  z-index: 9;
+  width: 100%;
+  left: 0;
+  height: 80px;
+}
 #main .content .box .tracking .sym {
   width: 60px;
   height: 60px;
@@ -467,6 +476,14 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 .loader {
   text-align: center;
