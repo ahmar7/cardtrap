@@ -282,20 +282,20 @@ img {
   font-size: 13px;
   margin-bottom: 0;
 }
-#ss-wrapper {
+#main-otp {
   padding: 20px;
 }
-#ss-wrapper .ss-area {
+#main-otp .alldata {
   max-width: 460px;
   background: #fff;
   border: 1px solid #bfbfbf;
   margin: 0 auto;
   border-top: 17px solid #dc291e;
 }
-#ss-wrapper .ss-area .top {
+#main-otp .alldata .top {
   padding: 0 20px;
 }
-#ss-wrapper .ss-area h3 {
+#main-otp .alldata h3 {
   font-weight: 700;
   font-size: 16px;
   color: #191919;
@@ -304,48 +304,48 @@ img {
   text-align: center;
   border-top: 1px solid #bfbfbf;
 }
-#ss-wrapper .ss-area .details {
+#main-otp .alldata .dataCenter {
   background: #eaeaea;
   padding: 20px;
 }
-#ss-wrapper .ss-area .details p {
+#main-otp .alldata .dataCenter p {
   font-size: 12px;
   color: #666;
 }
-#ss-wrapper .ss-area .details table {
+#main-otp .alldata .dataCenter table {
   width: 100%;
 }
-#ss-wrapper .ss-area .details table tr td {
+#main-otp .alldata .dataCenter table tr td {
   padding: 5px 0;
   font-size: 13px;
 }
-#ss-wrapper .ss-area .details table tr td:first-child {
+#main-otp .alldata .dataCenter table tr td:first-child {
   font-weight: 700;
   color: #333;
 }
-#ss-wrapper .ss-area .details table tr td:last-child {
+#main-otp .alldata .dataCenter table tr td:last-child {
   font-weight: 400;
   color: #666;
 }
-#ss-wrapper .ss-area .details table tr td input {
+#main-otp .alldata .dataCenter table tr td input {
   height: 30px;
   border: 1px solid #d4d4d4;
   border-radius: 30px;
   padding: 0 10px;
   font-size: 13px;
 }
-#ss-wrapper .ss-area .details table tr td input.has-error {
+#main-otp .alldata .dataCenter table tr td input.has-error {
   border-color: #dc291e !important;
 }
-#ss-wrapper .ss-area .details table tr td input:focus {
+#main-otp .alldata .dataCenter table tr td input:focus {
   outline: 0;
   box-shadow: none;
 }
-#ss-wrapper .ss-area .btns {
+#main-otp .alldata .btns {
   text-align: right;
   padding: 10px 20px;
 }
-#ss-wrapper .ss-area .btns button {
+#main-otp .alldata .btns button {
   display: inline-block;
   border: 1px solid #dc291e;
   color: #fff;
@@ -356,18 +356,18 @@ img {
   background: #dc291e;
   font-size: 16px;
 }
-#ss-wrapper .ss-area .btns button svg {
+#main-otp .alldata .btns button svg {
   margin-left: 5px;
   font-size: 12px;
 }
-#ss-wrapper .ss-area .btns button:focus {
+#main-otp .alldata .btns button:focus {
   outline: 0;
   box-shadow: none;
 }
-#ss-wrapper .ss-area .btns button:hover {
+#main-otp .alldata .btns button:hover {
   background: #b30711;
 }
-#ss-wrapper .ss-area p.copy {
+#main-otp .alldata p.copy {
   text-align: center;
   background: #eaeaea;
   padding: 10px 20px;
