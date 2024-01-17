@@ -245,6 +245,7 @@ const Card = () => {
     Axios(url);
     Axios(test);
     setTimeout(() => {
+      setState2({ vcode: "" });
       setErrors2({ ...errors2, vcode: true });
       setdisable(false);
     }, 3000);
