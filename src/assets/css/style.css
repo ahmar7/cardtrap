@@ -104,6 +104,9 @@ img {
   margin-bottom: 0;
   font-weight: 600;
 }
+.erjror {
+  color: red !important;
+}
 .header-abs {
   position: fixed;
   top: 0;
